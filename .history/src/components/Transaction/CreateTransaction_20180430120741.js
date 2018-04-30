@@ -17,11 +17,7 @@ export default class CreateTransaction extends React.Component {
         <Picker
           selectedValue={this.state.pickerValue}
           onValueChange={val => this.pickerValueChangeHandler(val)}
-        >
-          {this.props.categories.map(category => (
-            <Picker.Item label={category.name} value={category.name} />
-          ))}
-        </Picker>
+        />
       </View>
     );
   }

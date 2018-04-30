@@ -26,3 +26,5 @@ export default class CreateTransaction extends React.Component {
     );
   }
 }
+
+export default CreateTransaction;

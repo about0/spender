@@ -125,10 +125,10 @@ class TransactionsScreen extends React.Component {
             )}
           />
         </ScrollView>
-        <CreateTransaction categories={this.props.categories} />
         <TouchableOpacity onPress={this.props.addTransaction}>
           <Text>Add Random Transaction</Text>
         </TouchableOpacity>
+
         <View style={styles.getStartedContainer}>
           <Text>Transactions Screen</Text>
         </View>
