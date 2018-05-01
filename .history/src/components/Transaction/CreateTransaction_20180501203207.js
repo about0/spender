@@ -27,26 +27,14 @@ const styles = StyleSheet.create({
     backgroundColor: colors.tintColor,
   },
   container: {
-    marginTop: 50,
-    marginBottom: 100,
-    backgroundColor: colors.noticeText,
+    marginTop: 10,
+    marginBottom: 20,
+    backgroundColor: colors.warningBackground,
     flex: 1,
-    borderRadius: 16,
-    borderColor: colors.tintColor,
-    borderStyle: 'solid',
-    borderWidth: 2,
   },
   categoryPicker: {
     alignItems: 'center',
-    width: 250,
-  },
-  footer: {
-    alignItems: 'center',
-    alignContent: 'flex-end',
-  },
-  textInputs: {
-    width: '50%',
-    height: 45,
+    width: size.window.width / 2,
   },
 });
 class CreateTransaction extends React.Component {
@@ -115,7 +103,7 @@ class CreateTransaction extends React.Component {
                 ))}
               </Picker>
             </View>
-            <View style={styles.textInputs}>
+            <View>
               <TextInput
                 value={this.state.transactionAmount}
                 placeholder="Enter Amount"
@@ -155,7 +143,7 @@ class CreateTransaction extends React.Component {
                 }}
               />
             </View>
-            <View style={styles.footer}>
+            <View>
               <TouchableOpacity onPress={this._createTransactionHandler}>
                 <Text>Create Transaction</Text>
               </TouchableOpacity>

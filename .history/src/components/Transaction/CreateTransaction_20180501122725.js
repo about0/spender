@@ -12,41 +12,11 @@ import {
 import { connect } from 'react-redux';
 import DatePicker from 'react-native-datepicker';
 
-import {
-  ADD_TRANSACTION,
-  SHOW_TRANSACTION_CREATION_MODAL,
-} from '../../store/actions';
-
-import size from '../../constants/Layout';
-import colors from '../../constants/Colors';
+import { ADD_TRANSACTION, CLOSE_TRANSACTION_MODAL } from '../../store/actions';
 
 const styles = StyleSheet.create({
   modal: {
     marginTop: 22,
-    alignItems: 'center',
-    backgroundColor: colors.tintColor,
-  },
-  container: {
-    marginTop: 50,
-    marginBottom: 100,
-    backgroundColor: colors.noticeText,
-    flex: 1,
-    borderRadius: 16,
-    borderColor: colors.tintColor,
-    borderStyle: 'solid',
-    borderWidth: 2,
-  },
-  categoryPicker: {
-    alignItems: 'center',
-    width: 250,
-  },
-  footer: {
-    alignItems: 'center',
-    alignContent: 'flex-end',
-  },
-  textInputs: {
-    width: '50%',
-    height: 45,
   },
 });
 class CreateTransaction extends React.Component {
@@ -63,11 +33,11 @@ class CreateTransaction extends React.Component {
     });
   }
 
-  // _transactionAmountChangeHandler = (val) => {
-  //   this.setState({
-  //     transactionAmount: val,
-  //   });
-  // };
+  _transactionAmountChangeHandler = (val) => {
+    this.setState({
+      transactionAmount: val,
+    });
+  };
 
   _changeValueHandler = (val, field) => {
     this.setState({ [field]: val });
@@ -85,7 +55,6 @@ class CreateTransaction extends React.Component {
       transactionAmount: '',
       date: new Date(),
     });
-    this.props.closeTransactionModal();
   };
 
   _dateChangeHandler = (val) => {
@@ -96,13 +65,10 @@ class CreateTransaction extends React.Component {
 
   render() {
     return (
-      <View>
-        <Modal
-          visible={this.props.isModalOpen}
-          onRequestClose={this.props.closeTransactionModal}
-        >
-          <View style={styles.container}>
-            <View style={styles.categoryPicker}>
+      <View style={styles.modal}>
+        {this.props.isModalOpen && (
+          <Modal onRequestClose={this.props.closeTransactionModal}>
+            <View>
               <Text>Choose Category</Text>
               <Picker
                 selectedValue={this.props.categories[0]}
@@ -111,16 +77,16 @@ class CreateTransaction extends React.Component {
                 }
               >
                 {this.props.categories.map(category => (
-                  <Picker.Item label={category.name} value={category} />
+                  <Picker.Item label={category.name} value={category.name} />
                 ))}
               </Picker>
             </View>
-            <View style={styles.textInputs}>
+            <View>
               <TextInput
                 value={this.state.transactionAmount}
                 placeholder="Enter Amount"
                 keyboardType="numeric"
-                onChangeText={val =>
+                onChange={val =>
                   this._changeValueHandler(val, 'transactionAmount')
                 }
               />
@@ -128,7 +94,7 @@ class CreateTransaction extends React.Component {
                 value={this.state.transactionNote}
                 placeholder="Enter Note"
                 keyboardType="numeric"
-                onChangeText={val =>
+                onChange={val =>
                   this._changeValueHandler(val, 'transactionNote')
                 }
               />
@@ -155,18 +121,13 @@ class CreateTransaction extends React.Component {
                 }}
               />
             </View>
-            <View style={styles.footer}>
-              <TouchableOpacity onPress={this._createTransactionHandler}>
-                <Text>Create Transaction</Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={this.props.closeModalHandler}>
-                <Text>Close window</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </Modal>
+            <TouchableOpacity onPress={this._createTransactionHandler}>
+              <Text>Create Transaction</Text>
+            </TouchableOpacity>
+          </Modal>
+        )}
         <TouchableOpacity onPress={this.props.openModalHandler}>
-          <Text>Add Transaction</Text>
+          <Text>Open Modal</Text>
         </TouchableOpacity>
       </View>
     );
@@ -176,10 +137,7 @@ class CreateTransaction extends React.Component {
 const mapDispatchToProps = dispatch => ({
   createTransaction: data => dispatch({ type: ADD_TRANSACTION, payload: data }),
   closeTransactionModal: () =>
-    dispatch({
-      type: SHOW_TRANSACTION_CREATION_MODAL,
-      payload: { visible: false },
-    }),
+    dispatch({ type: CLOSE_TRANSACTION_MODAL, payload: { visible: false } }),
 });
 
 export default connect(null, mapDispatchToProps)(CreateTransaction);

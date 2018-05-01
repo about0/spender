@@ -18,35 +18,19 @@ import {
 } from '../../store/actions';
 
 import size from '../../constants/Layout';
-import colors from '../../constants/Colors';
 
 const styles = StyleSheet.create({
   modal: {
     marginTop: 22,
-    alignItems: 'center',
-    backgroundColor: colors.tintColor,
   },
   container: {
-    marginTop: 50,
-    marginBottom: 100,
-    backgroundColor: colors.noticeText,
-    flex: 1,
-    borderRadius: 16,
-    borderColor: colors.tintColor,
-    borderStyle: 'solid',
-    borderWidth: 2,
+    alignItems: 'center',
+    marginTop: 10,
+    marginBottom: 20,
   },
   categoryPicker: {
     alignItems: 'center',
-    width: 250,
-  },
-  footer: {
-    alignItems: 'center',
-    alignContent: 'flex-end',
-  },
-  textInputs: {
-    width: '50%',
-    height: 45,
+    width: size.window.height / 2,
   },
 });
 class CreateTransaction extends React.Component {
@@ -96,12 +80,12 @@ class CreateTransaction extends React.Component {
 
   render() {
     return (
-      <View>
-        <Modal
-          visible={this.props.isModalOpen}
-          onRequestClose={this.props.closeTransactionModal}
-        >
-          <View style={styles.container}>
+      <View style={styles.container}>
+        {this.props.isModalOpen && (
+          <Modal
+            style={styles.modal}
+            onRequestClose={this.props.closeTransactionModal}
+          >
             <View style={styles.categoryPicker}>
               <Text>Choose Category</Text>
               <Picker
@@ -115,7 +99,7 @@ class CreateTransaction extends React.Component {
                 ))}
               </Picker>
             </View>
-            <View style={styles.textInputs}>
+            <View>
               <TextInput
                 value={this.state.transactionAmount}
                 placeholder="Enter Amount"
@@ -155,18 +139,16 @@ class CreateTransaction extends React.Component {
                 }}
               />
             </View>
-            <View style={styles.footer}>
-              <TouchableOpacity onPress={this._createTransactionHandler}>
-                <Text>Create Transaction</Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={this.props.closeModalHandler}>
-                <Text>Close window</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </Modal>
+            <TouchableOpacity onPress={this._createTransactionHandler}>
+              <Text>Create Transaction</Text>
+            </TouchableOpacity>
+          </Modal>
+        )}
         <TouchableOpacity onPress={this.props.openModalHandler}>
           <Text>Add Transaction</Text>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.props.closeModalHandler}>
+          <Text>Close window</Text>
         </TouchableOpacity>
       </View>
     );

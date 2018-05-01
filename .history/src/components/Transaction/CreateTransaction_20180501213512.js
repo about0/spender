@@ -45,9 +45,8 @@ const styles = StyleSheet.create({
     alignContent: 'flex-end',
   },
   textInputs: {
-    width: '50%',
-    height: 45,
-  },
+    width: 50%
+  }
 });
 class CreateTransaction extends React.Component {
   state = {

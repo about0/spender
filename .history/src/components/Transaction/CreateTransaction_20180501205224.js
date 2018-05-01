@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
   },
   container: {
     marginTop: 50,
-    marginBottom: 100,
+    marginBottom: 200,
     backgroundColor: colors.noticeText,
     flex: 1,
     borderRadius: 16,
@@ -38,15 +38,11 @@ const styles = StyleSheet.create({
   },
   categoryPicker: {
     alignItems: 'center',
-    width: 250,
+    width: size.window.width / 2,
   },
   footer: {
     alignItems: 'center',
     alignContent: 'flex-end',
-  },
-  textInputs: {
-    width: '50%',
-    height: 45,
   },
 });
 class CreateTransaction extends React.Component {
@@ -115,7 +111,7 @@ class CreateTransaction extends React.Component {
                 ))}
               </Picker>
             </View>
-            <View style={styles.textInputs}>
+            <View>
               <TextInput
                 value={this.state.transactionAmount}
                 placeholder="Enter Amount"

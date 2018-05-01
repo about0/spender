@@ -41,6 +41,6 @@ module.exports = {
     'babel/no-unused-expressions': 1,
     'linebreak-style': ['error', 'windows'],
     'global-require': 0,
-    'react/no-did-mount-set-state': 0,
+    'no-did-mount-set-state': 0,
   },
 };

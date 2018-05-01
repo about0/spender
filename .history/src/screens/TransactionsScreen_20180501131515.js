@@ -25,6 +25,13 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
+  developmentModeText: {
+    marginBottom: 20,
+    color: 'rgba(0,0,0,0.4)',
+    fontSize: 14,
+    lineHeight: 19,
+    textAlign: 'center',
+  },
   contentContainer: {
     paddingTop: 30,
   },
@@ -128,14 +135,14 @@ class TransactionsScreen extends React.Component {
             )}
           />
         </ScrollView>
-
+        <CreateTransaction
+          categories={this.props.categories}
+          closeModalHandler={this._modalCloseHandler}
+          openModalHandler={this._modalOpenHandler}
+          isModalOpen={this.props.isModalOpen}
+        />
         <View style={styles.getStartedContainer}>
-          <CreateTransaction
-            categories={this.props.categories}
-            closeModalHandler={this._modalCloseHandler}
-            openModalHandler={this._modalOpenHandler}
-            isModalOpen={this.props.isModalOpen}
-          />
+          <Text>Transactions Screen</Text>
         </View>
       </View>
     );
