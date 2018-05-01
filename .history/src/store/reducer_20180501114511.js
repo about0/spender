@@ -5,7 +5,7 @@ import {
   ADD_CATEGORY,
   REMOVE_CATEGORY,
   SHOW_TRANSACTION_CREATION_MODAL,
-  CLEAR_DATA,
+  CLEAR_TRANSACTION_DATA,
 } from './actions';
 
 const initialState = {
@@ -67,7 +67,7 @@ function appReducer(state = initialState, action) {
         categories: removeItem(state.categories, action.payload.id),
       };
 
-    case CLEAR_DATA:
+    case CLEAR_TRANSACTION_DATA:
       return initialState;
 
     default:

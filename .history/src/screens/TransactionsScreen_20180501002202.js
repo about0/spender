@@ -166,9 +166,9 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => ({
-  transactions: state.transactions,
-  categories: state.categories,
-  isModalOpen: state.showTransactionCreationModal,
+  transactions: state.transactionsReducer.transactions,
+  categories: state.categoriesReducer.categories,
+  isModalOpen: state.transactionsReducer.showTransactionCreationModal,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TransactionsScreen);

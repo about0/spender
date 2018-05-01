@@ -42,12 +42,10 @@ class CreateTransaction extends React.Component {
       note: this.state.transactionNote,
       amount: this.state.transactionAmount,
       category: this.state.pickedCategory,
-      date: this.state.date,
     });
     this.setState({
       transactionNote: '',
-      transactionAmount: '',
-      date: new Date(),
+      transactionAmount: 0,
     });
   };
 
@@ -107,12 +105,11 @@ class CreateTransaction extends React.Component {
                     position: 'absolute',
                     left: 0,
                     top: 4,
-                    marginLeft: 0,
+                    marginLeft: 0
                   },
                   dateInput: {
-                    marginLeft: 36,
-                  },
-                }}
+                    marginLeft: 36
+                  }
               />
             </View>
             <TouchableOpacity onPress={this._createTransactionHandler}>

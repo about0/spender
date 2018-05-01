@@ -67,7 +67,7 @@ function appReducer(state = initialState, action) {
         categories: removeItem(state.categories, action.payload.id),
       };
 
-    case CLEAR_DATA:
+    case CLEAR_TRANSACTION_DATA:
       return initialState;
 
     default:

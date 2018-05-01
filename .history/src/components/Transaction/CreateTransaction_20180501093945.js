@@ -42,18 +42,10 @@ class CreateTransaction extends React.Component {
       note: this.state.transactionNote,
       amount: this.state.transactionAmount,
       category: this.state.pickedCategory,
-      date: this.state.date,
     });
     this.setState({
       transactionNote: '',
-      transactionAmount: '',
-      date: new Date(),
-    });
-  };
-
-  _dateChangeHandler = (val) => {
-    this.setState({
-      date: val,
+      transactionAmount: 0,
     });
   };
 
@@ -92,28 +84,7 @@ class CreateTransaction extends React.Component {
                   this._changeValueHandler(val, 'transactionNote')
                 }
               />
-              <DatePicker
-                date={this.state.date}
-                onDateChange={this._dateChangeHandler}
-                mode="date"
-                placeholder="select date"
-                format="YYYY-MM-DD"
-                minDate="2018-04-22"
-                maxDate="2019-06-01"
-                confirmBtnText="Confirm"
-                cancelBtnText="Cancel"
-                customStyles={{
-                  dateIcon: {
-                    position: 'absolute',
-                    left: 0,
-                    top: 4,
-                    marginLeft: 0,
-                  },
-                  dateInput: {
-                    marginLeft: 36,
-                  },
-                }}
-              />
+              <DatePicker />
             </View>
             <TouchableOpacity onPress={this._createTransactionHandler}>
               <Text>Create Transaction</Text>

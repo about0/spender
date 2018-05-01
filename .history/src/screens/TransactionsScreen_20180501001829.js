@@ -113,12 +113,18 @@ class TransactionsScreen extends React.Component {
     header: null,
   };
 
+  state = {
+    isModalOpen: false,
+  };
+
   _modalCloseHandler = () => {
-    this.props.toggleModal(false);
+    this.setState({ isModalOpen: false });
   };
 
   _modalOpenHandler = () => {
-    this.props.toggleModal(true);
+    this.setState({
+      isModalOpen: true,
+    });
   };
 
   render() {
@@ -139,7 +145,7 @@ class TransactionsScreen extends React.Component {
           categories={this.props.categories}
           closeModalHandler={this._modalCloseHandler}
           openModalHandler={this._modalOpenHandler}
-          isModalOpen={this.props.isModalOpen}
+          isModalOpen={this.state.isModalOpen}
         />
         <TouchableOpacity onPress={this.props.addTransaction}>
           <Text>Add Random Transaction</Text>
@@ -158,17 +164,12 @@ const mapDispatchToProps = dispatch => ({
       type: ADD_TRANSACTION,
       payload: { id: Date.now(), note: 'Test', amount: 100 },
     }),
-  toggleModal: visible =>
-    dispatch({
-      type: SHOW_TRANSACTION_CREATION_MODAL,
-      payload: { visible },
-    }),
+  closeModal: () => dispatch({ type: SHOW_TRANSACTION_CREATION_MODAL }),
 });
 
 const mapStateToProps = state => ({
-  transactions: state.transactions,
-  categories: state.categories,
-  isModalOpen: state.showTransactionCreationModal,
+  transactions: state.transactionsReducer.transactions,
+  categories: state.categoriesReducer.categories,
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(TransactionsScreen);

@@ -92,7 +92,7 @@ class CreateTransaction extends React.Component {
                   this._changeValueHandler(val, 'transactionNote')
                 }
               />
-              <DatePicker
+              {/* <DatePicker
                 date={this.state.date}
                 onDateChange={this._dateChangeHandler}
                 mode="date"
@@ -113,7 +113,7 @@ class CreateTransaction extends React.Component {
                     marginLeft: 36,
                   },
                 }}
-              />
+              /> */}
             </View>
             <TouchableOpacity onPress={this._createTransactionHandler}>
               <Text>Create Transaction</Text>

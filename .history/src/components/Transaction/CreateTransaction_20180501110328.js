@@ -42,12 +42,10 @@ class CreateTransaction extends React.Component {
       note: this.state.transactionNote,
       amount: this.state.transactionAmount,
       category: this.state.pickedCategory,
-      date: this.state.date,
     });
     this.setState({
       transactionNote: '',
       transactionAmount: '',
-      date: new Date(),
     });
   };
 

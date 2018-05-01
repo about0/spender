@@ -5,12 +5,11 @@ import {
   ADD_CATEGORY,
   REMOVE_CATEGORY,
   SHOW_TRANSACTION_CREATION_MODAL,
-  CLEAR_DATA,
+  CLEAR_TRANSACTION_DATA,
 } from './actions';
 
-const initialState = {
+const initialTransactionState = {
   transactions: [],
-  showTransactionCreationModal: false,
   categories: [
     {
       id: 1,
@@ -23,6 +22,24 @@ const initialState = {
       description: 'Medicine stuff',
     },
   ],
+  showTransactionCreationModal: false,
+};
+
+const initialCategoryState = {
+  transactions: [],
+  categories: [
+    {
+      id: 1,
+      name: 'Transport',
+      description: 'Expances with transport',
+    },
+    {
+      id: 2,
+      name: 'Medicine',
+      description: 'Medicine stuff',
+    },
+  ],
+  showTransactionCreationModal: false,
 };
 
 function removeItem(arr, id) {
@@ -35,7 +52,7 @@ function addItem(arr, item) {
   return [...arr, { ...item, id: Date.now() }];
 }
 
-function appReducer(state = initialState, action) {
+function transactionsReducer(state = initialTransactionState, action) {
   switch (action.type) {
     case ADD_TRANSACTION:
       return {
@@ -55,6 +72,16 @@ function appReducer(state = initialState, action) {
         showTransactionCreationModal: action.payload.visible,
       };
 
+    case CLEAR_TRANSACTION_DATA:
+      return initialTransactionState;
+
+    default:
+      return state;
+  }
+}
+
+function categoriesReducer(state = initialCategoryState, action) {
+  switch (action.type) {
     case ADD_CATEGORY:
       return {
         ...state,
@@ -67,16 +94,14 @@ function appReducer(state = initialState, action) {
         categories: removeItem(state.categories, action.payload.id),
       };
 
-    case CLEAR_DATA:
-      return initialState;
-
     default:
       return state;
   }
 }
 
-// const rootReducer = combineReducers({
-//   appReducer,
-// });
+const rootReducer = combineReducers({
+  categoriesReducer,
+  transactionsReducer,
+});
 
-export default appReducer;
+export default rootReducer;
