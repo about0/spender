@@ -21,32 +21,30 @@ import size from '../../constants/Layout';
 import colors from '../../constants/Colors';
 
 const styles = StyleSheet.create({
-  modal: {
-    marginTop: 22,
-    alignItems: 'center',
-    backgroundColor: colors.tintColor,
-  },
   container: {
     marginTop: 50,
     marginBottom: 100,
     backgroundColor: colors.noticeText,
     flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
     borderRadius: 16,
     borderColor: colors.tintColor,
     borderStyle: 'solid',
-    borderWidth: 2,
+    borderWidth: 1,
   },
   categoryPicker: {
-    alignItems: 'center',
     width: 250,
   },
   footer: {
     alignItems: 'center',
     alignContent: 'flex-end',
+    marginHorizontal: 50,
   },
   textInputs: {
-    width: '50%',
-    height: 45,
+    width: 250,
+    alignItems: 'center',
+    height: 60,
   },
 });
 class CreateTransaction extends React.Component {
@@ -102,21 +100,27 @@ class CreateTransaction extends React.Component {
           onRequestClose={this.props.closeTransactionModal}
         >
           <View style={styles.container}>
-            <View style={styles.categoryPicker}>
+            <View>
               <Text>Choose Category</Text>
               <Picker
-                selectedValue={this.props.categories[0]}
+                style={styles.categoryPicker}
+                selectedValue={this.state.pickedCategory}
                 onValueChange={val =>
                   this._changeValueHandler(val, 'pickedCategory')
                 }
               >
                 {this.props.categories.map(category => (
-                  <Picker.Item label={category.name} value={category} />
+                  <Picker.Item
+                    key={category.id}
+                    label={category.name}
+                    value={category}
+                  />
                 ))}
               </Picker>
             </View>
-            <View style={styles.textInputs}>
+            <View>
               <TextInput
+                style={styles.textInputs}
                 value={this.state.transactionAmount}
                 placeholder="Enter Amount"
                 keyboardType="numeric"
@@ -125,6 +129,7 @@ class CreateTransaction extends React.Component {
                 }
               />
               <TextInput
+                style={styles.textInputs}
                 value={this.state.transactionNote}
                 placeholder="Enter Note"
                 keyboardType="numeric"
@@ -155,11 +160,17 @@ class CreateTransaction extends React.Component {
                 }}
               />
             </View>
-            <View style={styles.footer}>
-              <TouchableOpacity onPress={this._createTransactionHandler}>
+            <View>
+              <TouchableOpacity
+                onPress={this._createTransactionHandler}
+                style={styles.footer}
+              >
                 <Text>Create Transaction</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={this.props.closeModalHandler}>
+              <TouchableOpacity
+                onPress={this.props.closeModalHandler}
+                style={styles.footer}
+              >
                 <Text>Close window</Text>
               </TouchableOpacity>
             </View>

@@ -123,8 +123,11 @@ class TransactionsScreen extends React.Component {
         >
           <FlatList
             data={this.props.transactions}
+            _keyExtractor={(item, index) => index.toString()}
             renderItem={item => (
-              <MonoText key={item.item.id}>{item.item.note}</MonoText>
+              <Text>
+                Note: {item.item.note}, $ {item.item.amount}
+              </Text>
             )}
           />
         </ScrollView>

@@ -18,10 +18,7 @@ What will be implemented in the future:
 
 ## Installation
 
-* ```git clone && npm install
-
-  ```
-
+* git clone && npm install
 * Install Expo XDE
 * Open the project folder with Expo XDE
 * Open Android Emulator

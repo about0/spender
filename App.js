@@ -55,9 +55,9 @@ export default class App extends React.Component {
     this.setState({ isLoadingComplete: true });
   };
 
-  componentDidMount() {
-    this._loadResourcesAsync();
-  }
+  // componentDidMount() {
+  //   this._loadResourcesAsync();
+  // }
 
   // _handleAppStart = () => {
   //   AsyncStorage.getItem('state');
