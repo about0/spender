@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, TextInput } from 'react-native';
 import { connect } from 'react-redux';
-import { ADD_CATEGORY, REMOVE_CATEGORY } from '../../store/actions';
+import { addCategory } from '../../store/actions';
 
 class CreateCategory extends React.Component {
   state = {
@@ -57,13 +57,10 @@ class CreateCategory extends React.Component {
 
 const mapDispatchToProps = dispatch => ({
   createCategory: (name, description) =>
-    dispatch({
-      type: ADD_CATEGORY,
-      payload: {
-        name,
-        description,
-      },
-    }),
+    dispatch(addCategory({
+      name,
+      description,
+    })),
 });
 
 export default connect(null, mapDispatchToProps)(CreateCategory);

@@ -22,10 +22,6 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
   },
-  loading: {
-    flex: 1,
-    justifyContent: 'center',
-  },
 });
 
 export default class App extends React.Component {
@@ -41,10 +37,7 @@ export default class App extends React.Component {
         require('./src/assets/images/robot-prod.png'),
       ]),
       Font.loadAsync({
-        // This is the font that we are using for our tab bar
         ...Ionicons.font,
-        // We include SpaceMono because we use it in HomeScreen.js. Feel free
-        // to remove this if you are not using it in your app
         'space-mono': require('./src/assets/fonts/SpaceMono-Regular.ttf'),
       }),
     ]);
@@ -59,14 +52,6 @@ export default class App extends React.Component {
   _handleFinishLoading = () => {
     this.setState({ isLoadingComplete: true });
   };
-
-  // componentDidMount() {
-  //   this._loadResourcesAsync();
-  // }
-
-  // _handleAppStart = () => {
-  //   AsyncStorage.getItem('state');
-  // };
 
   _handleStateChange = (state) => {
     AsyncStorage.setItem('state', state);

@@ -1,10 +1,17 @@
 import React from 'react';
-import { View, Text, FlatList, TouchableOpacity } from 'react-native';
+import { View, FlatList, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
-import { MonoText } from '../components/StyledText';
 
 import CreateCategory from '../components/Category/CreateCategory';
-import { REMOVE_CATEGORY } from '../store/actions';
+import { removeCategory } from '../store/actions';
+
+import CategoryItem from '../components/Category/CategoryItem';
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
 
 class CategoriesScreen extends React.Component {
   static navigationOptions = {
@@ -15,18 +22,15 @@ class CategoriesScreen extends React.Component {
 
   render() {
     return (
-      <View>
+      <View style={styles.container}>
         <FlatList
           data={this.props.categories}
           renderItem={item => (
             <View>
-              <MonoText>{item.item.name}</MonoText>
-              <MonoText>{item.item.description}</MonoText>
-              <TouchableOpacity
-                onPress={() => this.props.removeCategory(item.item.id)}
-              >
-                <Text>-</Text>
-              </TouchableOpacity>
+              <CategoryItem
+                item={item.item}
+                removeCategory={this.props.removeCategory}
+              />
             </View>
           )}
         />
@@ -41,7 +45,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  removeCategory: id => dispatch({ type: REMOVE_CATEGORY, payload: { id } }),
+  removeCategory: id => dispatch(removeCategory(id)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(CategoriesScreen);

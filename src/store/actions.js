@@ -1,8 +1,9 @@
-export const ADD_TRANSACTION = 'ADD_TRANSACTION';
-export const REMOVE_TRANSACTION = 'REMOVE_TRANSACTION';
-export const ADD_CATEGORY = 'ADD_CATEGORY';
-export const REMOVE_CATEGORY = 'REMOVE_CATEGORY';
-export const EDIT_CATEGORY = 'EDIT_CATEGORY';
-export const SHOW_TRANSACTION_CREATION_MODAL =
-  'SHOW_TRANSACTION_CREATION_MODAL';
-export const CLEAR_DATA = 'CLEAR_DATA';
+import { createAction } from 'redux-actions';
+
+export const addTransaction = createAction('TRANSACTION_ADD');
+export const removeTransaction = createAction('TRANSACTION_REMOVE');
+export const addCategory = createAction('CATEGORY_ADD');
+export const removeCategory = createAction('CATEGORY_REMOVE');
+export const editCategory = createAction('CATEGORY_EDIT');
+export const showTransactionCreationModal = createAction('TRANSACTION_CREATION_MODAL_SHOW');
+export const clearData = createAction('DATA_CLEAR');

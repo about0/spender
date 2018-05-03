@@ -1,14 +1,16 @@
-import { combineReducers } from 'redux';
+import { handleActions } from 'redux-actions';
 import {
-  ADD_TRANSACTION,
-  REMOVE_TRANSACTION,
-  ADD_CATEGORY,
-  REMOVE_CATEGORY,
-  SHOW_TRANSACTION_CREATION_MODAL,
-  CLEAR_DATA,
+  addTransaction,
+  removeTransaction,
+  addCategory,
+  editCategory,
+  removeCategory,
+  clearData,
+  showTransactionCreationModal,
 } from './actions';
 
 const initialState = {
+  balance: 0,
   transactions: [],
   showTransactionCreationModal: false,
   categories: [
@@ -35,48 +37,31 @@ function addItem(arr, item) {
   return [...arr, { ...item, id: Date.now() }];
 }
 
-function appReducer(state = initialState, action) {
-  switch (action.type) {
-    case ADD_TRANSACTION:
-      return {
-        ...state,
-        transactions: addItem(state.transactions, action.payload),
-      };
+const reducer = handleActions(
+  {
+    [addTransaction]: (state, action) => ({
+      ...state,
+      transactions: addItem(state.transactions, action.payload),
+    }),
+    [showTransactionCreationModal]: (state, action) => ({
+      ...state,
+      showTransactionCreationModal: action.payload,
+    }),
+    [removeTransaction]: (state, action) => ({
+      ...state,
+      transactions: removeItem(state.transactions, action.payload),
+    }),
+    [addCategory]: (state, action) => ({
+      ...state,
+      categories: addItem(state.categories, action.payload),
+    }),
+    [removeCategory]: (state, action) => ({
+      ...state,
+      categories: removeItem(state.categories, action.payload),
+    }),
+    [clearData]: () => initialState,
+  },
+  initialState,
+);
 
-    case REMOVE_TRANSACTION:
-      return {
-        ...state,
-        transactions: removeItem(state.transactions, action.payload.id),
-      };
-
-    case SHOW_TRANSACTION_CREATION_MODAL:
-      return {
-        ...state,
-        showTransactionCreationModal: action.payload.visible,
-      };
-
-    case ADD_CATEGORY:
-      return {
-        ...state,
-        categories: addItem(state.categories, action.payload),
-      };
-
-    case REMOVE_CATEGORY:
-      return {
-        ...state,
-        categories: removeItem(state.categories, action.payload.id),
-      };
-
-    case CLEAR_DATA:
-      return initialState;
-
-    default:
-      return state;
-  }
-}
-
-// const rootReducer = combineReducers({
-//   appReducer,
-// });
-
-export default appReducer;
+export default reducer;

@@ -13,8 +13,8 @@ import { connect } from 'react-redux';
 import DatePicker from 'react-native-datepicker';
 
 import {
-  ADD_TRANSACTION,
-  SHOW_TRANSACTION_CREATION_MODAL,
+  addTransaction,
+  showTransactionCreationModal,
 } from '../../store/actions';
 
 import size from '../../constants/Layout';
@@ -185,12 +185,8 @@ class CreateTransaction extends React.Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  createTransaction: data => dispatch({ type: ADD_TRANSACTION, payload: data }),
-  closeTransactionModal: () =>
-    dispatch({
-      type: SHOW_TRANSACTION_CREATION_MODAL,
-      payload: { visible: false },
-    }),
+  createTransaction: data => dispatch(addTransaction(data)),
+  closeTransactionModal: () => dispatch(showTransactionCreationModal(false)),
 });
 
 export default connect(null, mapDispatchToProps)(CreateTransaction);
