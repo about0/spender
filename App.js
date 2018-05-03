@@ -15,11 +15,16 @@ import { PersistGate } from 'redux-persist/lib/integration/react';
 import RootNavigation from './src/navigation/RootNavigation';
 
 import { store, persistor } from './src/store/index';
+import Loading from './src/components/common/Loading';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+  },
+  loading: {
+    flex: 1,
+    justifyContent: 'center',
   },
 });
 
@@ -77,7 +82,7 @@ export default class App extends React.Component {
       );
     }
     return (
-      <PersistGate persistor={persistor} loading={<Text>Loading...</Text>}>
+      <PersistGate persistor={persistor} loading={<Loading />}>
         <Provider store={store}>
           <View style={styles.container}>
             {Platform.OS === 'ios' && <StatusBar barStyle="default" />}
